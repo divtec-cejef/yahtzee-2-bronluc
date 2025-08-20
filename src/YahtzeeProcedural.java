@@ -23,13 +23,18 @@ for (int i = 0; i < liste.length; i++){
 
         afficherResultatDes(des);
 
-        Scanner sc = new Scanner(System.in);
-        System.out.println("Quels dés voulez-vous relancer (0 pour terminer))");
-        int position = sc.nextInt();
+        int compteur = 0;
 
-        while (position != 0) {
-            des[position - 1] = lancerDe();
-            position = sc.nextInt();
+        while (compteur < 3) {
+            Scanner sc = new Scanner(System.in);
+            System.out.println("Quels dés voulez-vous relancer (0 pour terminer)");
+            int position = sc.nextInt();
+            if (position != 0) {
+                des[position - 1] = lancerDe();
+                compteur++;
+            }else{
+                compteur += 3;
+            }
         }
         afficherResultatDes(des);
     }
