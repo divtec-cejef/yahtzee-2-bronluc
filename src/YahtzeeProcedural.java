@@ -3,15 +3,21 @@ public class YahtzeeProcedural {
         return (int) (Math.random() * 6) + 1;
     }
 
-    public static void des () {
-        int[] liste = {lancerDe(),  lancerDe(), lancerDe(), lancerDe(),  lancerDe()};
-        for (int i = 0; i < liste.length; i++){
-            System.out.println("Dé " + (i + 1) + " : " + liste[i]);
+    public static int[] lancer5Des () {
+        int[] liste = new int[5];
+        for (int i = 0; i < liste.length; i++) {
+            liste[i] = lancerDe();
         }
+        return liste;
     }
 
+    public static void afficherResultatDes (int[] liste) {
+for (int i = 0; i < liste.length; i++){
+        System.out.println("Dé " + (i + 1) + " : " + liste[i]);
+        }
+    }
     public static void main(String[] args) {
 
-        des();
+        afficherResultatDes(lancer5Des());
     }
 }
