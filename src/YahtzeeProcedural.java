@@ -37,15 +37,27 @@ for (int i = 0; i < liste.length; i++){
         int compteur = 1;
         afficherResultatDes(des);
 
+        // Jusqu’à 3 lancers
         while (compteur < 3) {
-            int position = demanderRelance(sc);
-            if (position == 0) {
-                break;
+            System.out.print("Quels dés voulez-vous relancer ? : ");
+            String saisie = sc.nextLine();
+
+            if (saisie.isEmpty()) {
+                break; // le joueur arrête
             }
 
-            relancer(des, position);
+            String[] positions = saisie.split(" "); // découpe en tableau de chaînes
+
+            for (String posStr : positions) {
+                int pos = Integer.parseInt(posStr); // conversion en int
+                if (pos >= 1 && pos <= 5) {
+                    des[pos - 1] = lancerDe(); // relancer uniquement ce dé
+                }
+            }
+
             compteur++;
+            System.out.println("Lancer " + compteur + " :");
+            afficherResultatDes(des);
         }
-        afficherResultatDes(des);
     }
 }
