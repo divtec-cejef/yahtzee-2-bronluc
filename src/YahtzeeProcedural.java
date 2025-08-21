@@ -116,11 +116,9 @@ public class YahtzeeProcedural {
         if (carre) points += sommeCarre; System.out.println("Carré : " + sommeCarre + " pts");
         if (fullHouse) points += 25; System.out.println("Full House : 25 pts");
         if (petiteSuite) points += 30; System.out.println("Petite suite : 30 pts");
-        if (grandeSuite) points += 40; System.out.println("kGrande suite : 40 pts");
+        if (grandeSuite) points += 40; System.out.println("Grande suite : 40 pts");
         if (yahtzee) points += 50; System.out.println("Yahtzee : 50 pts");
     }
-
-
 
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
@@ -141,6 +139,6 @@ public class YahtzeeProcedural {
             afficherResultatDes(des);
         }
         compterOccurrences(des);
-detecterCombinaisons(des);
+        detecterCombinaisons(des);
     }
 }
