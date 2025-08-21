@@ -21,7 +21,7 @@ public class YahtzeeProcedural {
     }
 
     public static int[] demanderQuelDesLancer(Scanner sc) {
-        System.out.print("Quels dés voulez-vous relancer ? (ex: 1 3 5, vide pour arrêter) : ");
+        System.out.print("Quels dés voulez-vous relancer ?");
         String saisie = sc.nextLine();
 
         if (saisie.isEmpty()) {
@@ -99,25 +99,38 @@ public class YahtzeeProcedural {
         paire = nbPaires == 1;
         deuxPaires = nbPaires == 2;
         fullHouse = brelan && nbPaires == 1;
+        if (fullHouse){
+            brelan = false;
+            paire = false;
+        }
 
-        if ((compteur[0] >= 1 && compteur[1] >= 1 && compteur[2] >= 1 && compteur[3] >= 1) ||
+        if ((compteur[0] == 1 && compteur[1] == 1 && compteur[2] == 1 && compteur[3] == 1 && compteur[4] == 1) ||
+                (compteur[1] == 1 && compteur[2] == 1 && compteur[3] == 1 && compteur[4] == 1 && compteur[5] == 1)) {
+            grandeSuite = true;
+        } else if ((compteur[0] >= 1 && compteur[1] >= 1 && compteur[2] >= 1 && compteur[3] >= 1) ||
                 (compteur[1] >= 1 && compteur[2] >= 1 && compteur[3] >= 1 && compteur[4] >= 1) ||
                 (compteur[2] >= 1 && compteur[3] >= 1 && compteur[4] >= 1 && compteur[5] >= 1)) {
             petiteSuite = true;
         }
-        if ((compteur[0] == 1 && compteur[1] == 1 && compteur[2] == 1 && compteur[3] == 1 && compteur[4] == 1) ||
-                (compteur[1] == 1 && compteur[2] == 1 && compteur[3] == 1 && compteur[4] == 1 && compteur[5] == 1)) {
-            grandeSuite = true;
-        }
 
-        if (paire) points += 5; System.out.println("Paire : 5 pts");
-        if (deuxPaires) points += 10; System.out.println("Deux paires : 10 pts");
-        if (brelan) points += sommeBrelan; System.out.println("Brelan : " + sommeBrelan + " pts");
-        if (carre) points += sommeCarre; System.out.println("Carré : " + sommeCarre + " pts");
-        if (fullHouse) points += 25; System.out.println("Full House : 25 pts");
-        if (petiteSuite) points += 30; System.out.println("Petite suite : 30 pts");
-        if (grandeSuite) points += 40; System.out.println("Grande suite : 40 pts");
-        if (yahtzee) points += 50; System.out.println("Yahtzee : 50 pts");
+
+        if (paire){ points += 5;
+            System.out.println("Paire : 5 pts");}
+        if (deuxPaires){ points += 10;
+            System.out.println("Deux paires : 10 pts");}
+        if (brelan){ points += sommeBrelan;
+            System.out.println("Brelan : " + sommeBrelan + " pts");}
+        if (carre) {points += sommeCarre;
+            System.out.println("Carré : " + sommeCarre + " pts");}
+        if (fullHouse) {points += 25;
+            System.out.println("Full House : 25 pts");}
+        if (petiteSuite) {points += 30;
+            System.out.println("Petite suite : 30 pts");}
+        if (grandeSuite) {points += 40;
+            System.out.println("Grande suite : 40 pts");}
+        if (yahtzee) {points += 50;
+            System.out.println("Yahtzee : 50 pts");}
+        System.out.println("Total points : " + points);
     }
 
     public static void main(String[] args) {
