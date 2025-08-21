@@ -18,23 +18,33 @@ for (int i = 0; i < liste.length; i++){
         System.out.println("Dé " + (i + 1) + " : " + liste[i]);
         }
     }
+
+    public static int demanderRelance (Scanner sc) {
+        System.out.println("Quels dés voulez-vous relancer ? (3 max)");
+        return sc.nextInt();
+    }
+
+    public static void relancer(int[] des, int position) {
+        if (position >= 1 && position <= des.length) {
+            des[position - 1] = lancerDe();
+        }
+    }
+
     public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
         int[] des = lancer5Des();
 
+        int compteur = 1;
         afficherResultatDes(des);
 
-        int compteur = 0;
-
         while (compteur < 3) {
-            Scanner sc = new Scanner(System.in);
-            System.out.println("Quels dés voulez-vous relancer (0 pour terminer)");
-            int position = sc.nextInt();
-            if (position != 0) {
-                des[position - 1] = lancerDe();
-                compteur++;
-            }else{
-                compteur += 3;
+            int position = demanderRelance(sc);
+            if (position == 0) {
+                break;
             }
+
+            relancer(des, position);
+            compteur++;
         }
         afficherResultatDes(des);
     }
