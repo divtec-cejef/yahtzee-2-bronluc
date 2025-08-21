@@ -44,6 +44,20 @@ public class YahtzeeProcedural {
         }
     }
 
+    public static void compterOccurrences(int[] des) {
+        int[] compteur = new int[6]; // indices 0 à 5 pour les faces 1 à 6
+
+        for (int de : des) {
+            compteur[de - 1]++; // incrémente la case correspondant à la face
+        }
+
+        System.out.println("Occurrences des faces :");
+        for (int i = 0; i < compteur.length; i++) {
+            System.out.println("Face " + (i + 1) + " : " + compteur[i]);
+        }
+    }
+
+
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
 
@@ -62,5 +76,6 @@ public class YahtzeeProcedural {
             relancer(des, positions);
             afficherResultatDes(des);
         }
+        compterOccurrences(des);
     }
 }
