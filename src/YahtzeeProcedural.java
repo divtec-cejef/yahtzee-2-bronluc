@@ -57,6 +57,67 @@ public class YahtzeeProcedural {
         }
     }
 
+    public static void detecterCombinaisons(int[] des) {
+        // 1️⃣ Compter les occurrences de chaque face
+        int[] compteur = new int[6]; // indices 0 à 5 pour les faces 1 à 6
+        for (int de : des) {
+            compteur[de - 1]++;
+        }
+
+        int points = 0;
+
+        boolean paire = false;
+        boolean doublePaires = false;
+        boolean brelan = false;
+        boolean carre = false;
+        boolean fullHouse = false;
+        boolean petiteSuite = false;
+        boolean grandeSuite = false;
+        boolean yahtzee = false;
+
+        int nbPaires = 0;
+        int sommeBrelan = 0;
+        int sommeCarre = 0;
+
+        for (int i = 0; i < 6; i++) {
+            if (compteur[i] == 5) {
+                yahtzee = true;
+            }else if ((compteur[0] == 1 && compteur[1] == 1 && compteur[2] == 1 && compteur[3] == 1 && compteur[4] == 1) ||
+                    (compteur[1] == 1 && compteur[2] == 1 && compteur[3] == 1 && compteur[4] == 1 && compteur[5] == 1)) {
+                grandeSuite = true;
+            }else if ((compteur[0] >= 1 && compteur[1] >= 1 && compteur[2] >= 1 && compteur[3] >= 1) ||
+                    (compteur[1] >= 1 && compteur[2] >= 1 && compteur[3] >= 1 && compteur[4] >= 1) ||
+                    (compteur[2] >= 1 && compteur[3] >= 1 && compteur[4] >= 1 && compteur[5] >= 1)) {
+                petiteSuite = true;
+            }else if (compteur[i] == 4) {
+                carre = true;
+                sommeCarre = 4 * (i + 1);
+            } else if (compteur[i] == 3) {
+                brelan = true;
+                sommeBrelan = 3 * (i + 1);
+            } else if (compteur[i] == 2) {
+                nbPaires++;
+            }
+        }
+            if (brelan && nbPaires == 1){
+                fullHouse = true;
+                paire = false;
+                brelan = false;
+            } if (nbPaires == 2){
+                doublePaires = true;
+            }else if (nbPaires == 1){
+                paire = true;
+            }
+        if (paire) points += 5; System.out.println("Paire : 5 pts");
+        if (doublePaires) points += 10; System.out.println("Deux paires : 10 pts");
+        if (brelan) points += sommeBrelan; System.out.println("Brelan : " + sommeBrelan + " pts");
+        if (carre) points += sommeCarre;  System.out.println("Carré : " + sommeCarre + " pts");
+        if (fullHouse) points += 25; System.out.println("Full House : 25 pts");
+        if (petiteSuite) points += 30; System.out.println("Petite suite : 30 pts");
+        if (grandeSuite) points += 40; System.out.println("Grande suite : 40 pts");
+        if (yahtzee) points+= 50; System.out.println("Yahtzee : 50 pts");
+    }
+
 
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
