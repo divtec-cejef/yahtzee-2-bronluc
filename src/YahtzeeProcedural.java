@@ -44,7 +44,7 @@ public class YahtzeeProcedural {
         }
     }
 
-    public static void compterOccurrences(int[] des) {
+    public static int[] compterOccurrences(int[] des) {
         int[] compteur = new int[6]; // indices 0 à 5 pour les faces 1 à 6
 
         for (int de : des) {
@@ -55,14 +55,12 @@ public class YahtzeeProcedural {
         for (int i = 0; i < compteur.length; i++) {
             System.out.println("Face " + (i + 1) + " : " + compteur[i]);
         }
+        return compteur;
     }
 
     public static void detecterCombinaisons(int[] des) {
-        // 1️⃣ Compter les occurrences de chaque face
-        int[] compteur = new int[6]; // indices 0 à 5 pour les faces 1 à 6
-        for (int de : des) {
-            compteur[de - 1]++;
-        }
+
+        int[] compteur = compterOccurrences(des);
 
         int points = 0;
 
@@ -107,11 +105,9 @@ public class YahtzeeProcedural {
 
         paire = nbPaires == 1;
         doublePaires = nbPaires == 2;
-        fullHouse = brelan && nbPaires == 1;
-        if (fullHouse || petiteSuite || grandeSuite) {
-            brelan = false;
-            paire = false;
-        }
+        fullHouse = brelan && paire;
+
+        if (fullHouse) {doublePaires = true;}
 
         System.out.println("\n");
 
@@ -121,7 +117,6 @@ public class YahtzeeProcedural {
         if (doublePaires){ points += 10;
             System.out.println("Double paires : \t10 pts");
         }else{System.out.println("Double paires : \t0 pts");}
-
         if (brelan){ points += sommeBrelan;
             System.out.println("Brelan : \t" + sommeBrelan + " pts");
         }else{System.out.println("Brelan : \t0 pts");}
@@ -140,21 +135,6 @@ public class YahtzeeProcedural {
         if (yahtzee) {points += 50;
             System.out.println("Yahtzee : \t50 pts");
         }else {System.out.println("Yahtzee : \t0 pts");}
-        System.out.println("Total points : \t" + points);
-
-    }
-
-    public static void afficherTableau (int[] des, int sommeBrelan, int sommeCarre) {
-
-            System.out.println("Paire : 5 pts");
-
-            System.out.println("Deux paires : 10 pts");
-            System.out.println("Brelan : " + sommeBrelan + " pts");
-            System.out.println("Carré : " + sommeCarre + " pts");
-            System.out.println("Full House : 25 pts");
-            System.out.println("Petite suite : 30 pts");
-            System.out.println("Grande suite : 40 pts");
-            System.out.println("Yahtzee : 50 pts");
     }
 
     public static void main(String[] args) {
@@ -175,7 +155,6 @@ public class YahtzeeProcedural {
             relancer(des, positions);
             afficherResultatDes(des);
         }
-        compterOccurrences(des);
         detecterCombinaisons(des);
     }
 }
