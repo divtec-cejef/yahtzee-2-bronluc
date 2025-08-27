@@ -67,7 +67,7 @@ public class YahtzeeProcedural {
         int points = 0;
 
         boolean paire = false;
-        boolean deuxPaires = false;
+        boolean doublePaires = false;
         boolean brelan = false;
         boolean carre = false;
         boolean fullHouse = false;
@@ -96,14 +96,6 @@ public class YahtzeeProcedural {
             }
         }
 
-        paire = nbPaires == 1;
-        deuxPaires = nbPaires == 2;
-        fullHouse = brelan && nbPaires == 1;
-        if (fullHouse){
-            brelan = false;
-            paire = false;
-        }
-
         if ((compteur[0] == 1 && compteur[1] == 1 && compteur[2] == 1 && compteur[3] == 1 && compteur[4] == 1) ||
                 (compteur[1] == 1 && compteur[2] == 1 && compteur[3] == 1 && compteur[4] == 1 && compteur[5] == 1)) {
             grandeSuite = true;
@@ -113,24 +105,56 @@ public class YahtzeeProcedural {
             petiteSuite = true;
         }
 
+        paire = nbPaires == 1;
+        doublePaires = nbPaires == 2;
+        fullHouse = brelan && nbPaires == 1;
+        if (fullHouse || petiteSuite || grandeSuite) {
+            brelan = false;
+            paire = false;
+        }
+
+        System.out.println("\n");
 
         if (paire){ points += 5;
-            System.out.println("Paire : 5 pts");}
-        if (deuxPaires){ points += 10;
-            System.out.println("Deux paires : 10 pts");}
+            System.out.println("Paire : \t5 pts");
+        }else{System.out.println("Paire : \t0 pts");}
+        if (doublePaires){ points += 10;
+            System.out.println("Double paires : \t10 pts");
+        }else{System.out.println("Double paires : \t0 pts");}
+
         if (brelan){ points += sommeBrelan;
-            System.out.println("Brelan : " + sommeBrelan + " pts");}
+            System.out.println("Brelan : \t" + sommeBrelan + " pts");
+        }else{System.out.println("Brelan : \t0 pts");}
         if (carre) {points += sommeCarre;
-            System.out.println("Carré : " + sommeCarre + " pts");}
+            System.out.println("Carré : \t" + sommeCarre + " pts");
+        }else{System.out.println("Carré : \t0 pts");}
         if (fullHouse) {points += 25;
-            System.out.println("Full House : 25 pts");}
+            System.out.println("Full House : \t25 pts");
+        }else{System.out.println("Full House : \t0 pts");}
         if (petiteSuite) {points += 30;
-            System.out.println("Petite suite : 30 pts");}
+            System.out.println("Petite suite : \t30 pts");
+        }else {System.out.println("Petite suite : \t0 pts");}
         if (grandeSuite) {points += 40;
-            System.out.println("Grande suite : 40 pts");}
+            System.out.println("Grande suite : \t40 pts");
+        }else  {System.out.println("Grande suite : \t0 pts");}
         if (yahtzee) {points += 50;
-            System.out.println("Yahtzee : 50 pts");}
-        System.out.println("Total points : " + points);
+            System.out.println("Yahtzee : \t50 pts");
+        }else {System.out.println("Yahtzee : \t0 pts");}
+        System.out.println("Total points : \t" + points);
+
+    }
+
+    public static void afficherTableau (int[] des, int sommeBrelan, int sommeCarre) {
+
+            System.out.println("Paire : 5 pts");
+
+            System.out.println("Deux paires : 10 pts");
+            System.out.println("Brelan : " + sommeBrelan + " pts");
+            System.out.println("Carré : " + sommeCarre + " pts");
+            System.out.println("Full House : 25 pts");
+            System.out.println("Petite suite : 30 pts");
+            System.out.println("Grande suite : 40 pts");
+            System.out.println("Yahtzee : 50 pts");
     }
 
     public static void main(String[] args) {
