@@ -107,7 +107,7 @@ public class YahtzeeProcedural {
         doublePaires = nbPaires == 2;
         fullHouse = brelan && paire;
 
-        if (fullHouse) {doublePaires = true;}
+        if (doublePaires) {paire = true;}
 
         System.out.println("\n");
 
@@ -136,6 +136,8 @@ public class YahtzeeProcedural {
             System.out.println("Yahtzee : \t50 pts");
         }else {System.out.println("Yahtzee : \t0 pts");}
     }
+
+    // boucle infini
 
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
